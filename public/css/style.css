@@ -1,0 +1,6 @@
+
+.background-img {
+  background-image: url("waves.jpg"); 
+  background-size: cover;
+  background-position: center;
+}
