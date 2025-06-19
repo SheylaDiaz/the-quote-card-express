@@ -3,16 +3,6 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 
-try {
-  const rawEnv = fs.readFileSync(".env", "utf8");
-  console.log("🔍 .env file contents:", rawEnv);
-} catch (err) {
-  console.error("❌ Could not read .env:", err);
-}
-
-console.log("Loaded Unsplash key:", process.env.UNSPLASH_KEY);
-
-
 const app = express();
 const port = 8080;
 
@@ -32,8 +22,6 @@ app.get("/background", async (req, res) => {
   try {
     const response = await fetch(`https://api.unsplash.com/photos/random?query=ocean&orientation=landscape&client_id=${process.env.UNSPLASH_KEY}`);
     const data = await response.json();
-
-    console.log("Unsplash data:", data); // optional debugging
 
     res.json({
       imageUrl: (data.urls && data.urls.full) || "",
