@@ -24,5 +24,5 @@ async function getQuote() {
   }
 }
 
-// 🟢 Call the function when the page loads
+
 window.onload = getQuote;
