@@ -5,6 +5,31 @@ const elements = {
     author: document.getElementById("author"),
 };
 async function getRandomImage() {
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}`;
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json();
+        const receivedPhotoUrl = returnedData.urls.regular;
+
+        return receivedPhotoUrl;
+    } catch (error) {
+        console.error(error);
+    }
+}
+/*async function getRandomImage() {
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}`;
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json();
+        const receivedPhotoUrl = returnedData.urls.regular;
+
+        return receivedPhotoUrl;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+/*async function getRandomImage() {
     const client_id = "bbohtb1sJylpkcqu-KsDatNqvhj0zkdjaPUOjs9sRxY";
     const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
     try {
@@ -15,6 +40,10 @@ async function getRandomImage() {
         console.error(error)
     }
 }
+require("dotenv").config();
+const cors = require("cors");
+
+app.use(cors());
 getRandomImage();
 /*const quotes = [
     {

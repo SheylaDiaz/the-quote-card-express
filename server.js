@@ -17,7 +17,12 @@ app.get("/quote", (req, res) => {
 
 
 
-
+app.use("/api/v1/getRandomImage", (request, response) => {
+    response.status(200).json({
+        status: 200,
+        data: process.env.CLIENT_ID
+    });
+});
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
