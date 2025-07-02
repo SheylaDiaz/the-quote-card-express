@@ -10,6 +10,7 @@ async function getRandomImage() {
         console.error(error)
     }
 }
+getRandomImage();
 /*const elements = {
     quote: document.getElementById("quote"),
     author: document.getElementById("author"),
