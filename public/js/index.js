@@ -5,12 +5,14 @@ async function getRandomImage() {
     try {
         const response = await fetch(endpoint);
         const returnedData = await response.json()
-        console.log(returnedData)
+     const receivedPhotoUrl = returnedData.urls.regular;
+
+        const imgDiv = document.querySelector(".background-img");
+        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
     } catch (error) {
-        console.error(error)
-    }
+        console.error(error);
 }
-getRandomImage();
+}
 /*const elements = {
     quote: document.getElementById("quote"),
     author: document.getElementById("author"),
@@ -42,4 +44,4 @@ function loopThroughQuotes() {
             quoteIndex = 0;
         }
     }, 3000);
-}*/
+}*/ 
