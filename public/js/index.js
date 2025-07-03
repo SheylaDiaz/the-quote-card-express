@@ -1,29 +1,59 @@
-"use strict";
-function setRandomBackground() {
+"use strict"
 
-  const url = `https://source.unsplash.com/1600x900?sig=${Date.now()}`;
-  document.querySelector(".background-img").style.backgroundImage = `url("${url}")`;
+async function getRandomImage() {
+    const endpoint = "http://localhost:8080/api/v1/getRandomImage";
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json();
+        const receivedPhotoUrl = returnedData.data;
+
+        const imgDiv = document.querySelector(".background-img");
+        imgDiv.style.backgroundImage = `url(${receivedPhotoUrl})`;
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+getRandomImage();
+
+
+/*
+const elements = {
+    quote: document.getElementById("quote"),
+    author: document.getElementById("author"),
+};
+
 const quotes = [
-  { q: "All hands! Abandon ship!",               a: "Captain Picard" },
-  { q: "D'oh!",                                  a: "Homer Simpson"  },
-  { q: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.", a: "Eric Schmidt" }
-];
+    {
+        quote: "All hands! Abandon ship!",
+        author: "Captain Picard",
+    },
+    {
+        quote: "Doh!",
+        author: "Homer Simpson",
+    },
+    {
+        quote: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.",
+        author: "Eric Schmidt",
+    },
+    {
+        quote: "What is better - to be born good, or to overcome your evil nature through grea effort?",
+        author: "Paarthurnax",
+    }
+]
 
-function loopQuotes() {
-  let i = 0;
-  const qEl = document.getElementById("quote");
-  const aEl = document.getElementById("author");
-  const show = () => {
-    qEl.textContent = quotes[i].q;
-    aEl.textContent = quotes[i].a;
-    i = (i + 1) % quotes.length;
-  };
-  show();
-  setInterval(show, 3000);
+function loopThroughQuotes() {
+    let quoteIndex = 0;
+    setInterval(() => {
+        if (quoteIndex < quotes.length) {
+            elements.quote.textContent = quotes[quoteIndex].quote;
+            elements.author.textContent = quotes[quoteIndex].author;
+            quoteIndex++;
+        } else {
+            quoteIndex = 0;
+        }
+    }, 3000);
 }
-document.addEventListener("DOMContentLoaded", () => {
-  setRandomBackground();
-  loopQuotes();
-});
+
+setTimeout(loopThroughQuotes, 3000); */
 
