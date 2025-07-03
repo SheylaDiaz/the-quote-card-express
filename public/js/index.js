@@ -1,48 +1,48 @@
-"use strict"
+
+"use strict";
 async function getRandomImage() {
-    const client_id = "bbohtb1sJylpkcqu-KsDatNqvhj0zkdjaPUOjs9sRxY0";
-    const endpoint = `http://api.unsplash.com/photos/random/?client_id=${client_id}`;
-    try {
-        const response = await fetch(endpoint);
-        const returnedData = await response.json()
-     const receivedPhotoUrl = returnedData.urls.regular;
+  const ACCESS_KEY = "bbohtb1sJylpkcqu-KsDatNqvhj0zkdjaPUOjs9sRxY0";
+  const endpoint   = `https://api.unsplash.com/photos/random?orientation=landscape&client_id=${ACCESS_KEY}`;
 
-        const imgDiv = document.querySelector(".background-img");
-        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
-    } catch (error) {
-        console.error(error);
+  try {
+    const res = await fetch(endpoint);
+    if (!res.ok) throw new Error(`Unsplash responded ${res.status}`);
+
+    const data = await res.json();
+    const imgUrl = data.urls.regular;
+
+    document.querySelector(".background-img").style.backgroundImage =
+      `url(${imgUrl})`;
+  } catch (err) {
+    console.error("Unsplash fetch failed → using fallback image", err);
+    document.querySelector(".background-img").style.backgroundImage =
+      `url("./img/mockup.jpg")`;               // fallback local image
+  }
 }
+
 const elements = {
-    quote: document.getElementById("quote"),
-    author: document.getElementById("author"),
+  quote : document.getElementById("quote"),
+  author: document.getElementById("author"),
 };
-}
-getRandomImage();
-/*const quotes = [
-    {
-        quote: "All hands! Abandon ship!",
-        author: "Captain Picard",
-    },
 
-    {
-        quote: "Doh!",
-        author: "Homer Simpson",
-    },
+const quotes = [
+  { quote: "All hands! Abandon ship!", author: "Captain Picard" },
+  { quote: "D'oh!",                    author: "Homer Simpson" },
+  { quote: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.", author: "Eric Schmidt" }
+];
 
-    {
-        quote: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.",
-        author: "Eric Schmidt",
-    }
-]
 function loopThroughQuotes() {
-    let quoteIndex = 0;
-    setInterval(() => {
-        if (quoteIndex < quotes.length) {
-            elements.quote.textContent = quotes[quoteIndex].quote;
-            elements.author.textContent = quotes[quoteIndex].author;
-            quoteIndex++;
-        } else {
-            quoteIndex = 0;
-        }
-    }, 3000);
-}*/ 
+  let i = 0;
+  const show = () => {
+    elements.quote.textContent  = quotes[i].quote;
+    elements.author.textContent = quotes[i].author;
+    i = (i + 1) % quotes.length;
+  };
+  show();                
+  setInterval(show, 3000); 
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  getRandomImage();
+  loopThroughQuotes();
+});
