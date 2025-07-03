@@ -12,12 +12,13 @@ async function getRandomImage() {
     } catch (error) {
         console.error(error);
 }
-}
-/*const elements = {
+const elements = {
     quote: document.getElementById("quote"),
     author: document.getElementById("author"),
 };
-const quotes = [
+}
+getRandomImage();
+/*const quotes = [
     {
         quote: "All hands! Abandon ship!",
         author: "Captain Picard",
