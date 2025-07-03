@@ -1,38 +1,39 @@
-
- body {
+* {
   margin: 0;
-  height: 100%;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.background-image{
- background-image: url("https://images.unsplash.com/photo-...");
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.background-img {
+  height: 100vh;
+  width: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;  
-  width: 100vh;    
-  grid-row: 1 / -1;    
-  grid-column: 1 / -1;
-  z-index: -1;
-}
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+};
 
 .card {
-  background: rgba(165, 91, 91, 0.9);
+  background-color: rgba(0, 0, 0, 0.6); /* translucent dark bg */
+  color: white;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  max-width: 600px;
-  width: 90%;
-}
+  max-width: 700px;
+  width: 80%;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+};
 
-button {
-  padding: 0.5rem 1rem;
+#author {
+  font-size: 1.2rem;
   margin-top: 1rem;
-  border: none;
-  border-radius: 8px;
-  background: #007bff;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-}
+  font-style: italic;
+};
