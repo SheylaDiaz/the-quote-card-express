@@ -1,6 +1,6 @@
+"use strict";
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch"); 
 require("dotenv").config();
 
 const app = express();
@@ -11,17 +11,9 @@ const corsOptions = {
     origin: `http://localhost:${port}` 
 };
 app.use(cors(corsOptions));
-
-
-app.get("/", (req, res) => {
-    res.send("Welcome! Server is running.");
-});
-
-
-app.get("/test", (req, res) => {
-    res.send("SERVER WORKS");
-});
-
+app.use(express.static("./public"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 async function getRandomImage() {
     const endpoint = `https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}`;

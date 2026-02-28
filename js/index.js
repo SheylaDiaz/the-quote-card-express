@@ -1,20 +1,16 @@
 
-
 async function getRandomImage() {
-    const endpoint = "http://localhost:8080/api/v1/getRandomImage";
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}`;
     try {
         const response = await fetch(endpoint);
         const returnedData = await response.json();
-        const receivedPhotoUrl = returnedData.data;
+        const receivedPhotoUrl = returnedData.urls.regular;
 
-        const imgDiv = document.querySelector(".background-img");
-        imgDiv.style.backgroundImage = `url(${receivedPhotoUrl})`;
+        return receivedPhotoUrl;
     } catch (error) {
         console.error(error);
     }
 }
-
-getRandomImage();
 
 
 
